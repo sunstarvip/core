@@ -1,4 +1,4 @@
-package com.darknight.util;
+package com.darknight.core.util;
 
 /**
  * Created by DarKnight on 14-2-2.

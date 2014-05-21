@@ -1,4 +1,4 @@
-package com.darknight.web.spring;
+package com.darknight.core.web.spring;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

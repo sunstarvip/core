@@ -1,6 +1,6 @@
-package com.darknight.base.entity;
+package com.darknight.core.base.entity;
 
-import com.darknight.util.ParameterUtil;
+import com.darknight.core.util.ParameterUtil;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;

@@ -1,4 +1,4 @@
-package com.darknight.util;
+package com.darknight.core.util;
 
 import sun.misc.BASE64Encoder;
 
