@@ -21,7 +21,7 @@ public class DefaultEntity {
 
     @Id
     @GeneratedValue(generator="system-uuid")
-    @GenericGenerator(name="system-uuid", strategy="uuid2")
+    @GenericGenerator(name="system-uuid", strategy="uuid")
     public String getId() {
         return id;
     }
