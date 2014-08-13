@@ -1,6 +1,6 @@
 package com.darknight.core.base.dao.impl;
 
-import com.darknight.core.base.dao.BaseJpaRepository;
+import com.darknight.core.base.dao.BaseJpaDao;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -14,24 +14,22 @@ import org.springframework.data.repository.NoRepositoryBean;
 import javax.persistence.EntityManager;
 import java.io.Serializable;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
- * Created by DarKnight on 14-2-5.
+ * Created by DarKnight on 2014/8/10.
  */
 @NoRepositoryBean
-public class DefaultJpaRepository<T, ID extends Serializable> extends SimpleJpaRepository<T, ID> implements BaseJpaRepository<T, ID> {
+public class BaseJpaRepository<T, ID extends Serializable> extends SimpleJpaRepository<T, ID> implements BaseJpaDao<T, ID> {
     private Class<T> entityClass;
     private final EntityManager entityManager;
 
-    public DefaultJpaRepository(Class<T> domainClass, EntityManager entityManager) {
+    public BaseJpaRepository(Class<T> domainClass, EntityManager entityManager) {
         super(domainClass, entityManager);
         this.entityManager = entityManager;
         this.entityClass = domainClass;
     }
 
-    public DefaultJpaRepository(final JpaEntityInformation<T, ?> entityInformation, EntityManager entityManager) {
+    public BaseJpaRepository(final JpaEntityInformation<T, ?> entityInformation, EntityManager entityManager) {
         super(entityInformation, entityManager);
         this.entityManager = entityManager;
     }

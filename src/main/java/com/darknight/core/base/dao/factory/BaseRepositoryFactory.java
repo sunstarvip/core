@@ -1,6 +1,6 @@
 package com.darknight.core.base.dao.factory;
 
-import com.darknight.core.base.dao.impl.DefaultJpaRepository;
+import com.darknight.core.base.dao.impl.BaseJpaRepository;
 import org.springframework.data.jpa.repository.support.JpaRepositoryFactory;
 import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.data.repository.core.RepositoryMetadata;
@@ -10,7 +10,7 @@ import javax.persistence.EntityManager;
 /**
  * Created by DarKnight on 2014/4/25 0025.
  */
-public class DefaultRepositoryFactory extends JpaRepositoryFactory {
+public class BaseRepositoryFactory extends JpaRepositoryFactory {
 //        private EntityManager entityManager;
 //
 //        public DefaultRepositoryFactory(EntityManager entityManager) {
@@ -28,18 +28,18 @@ public class DefaultRepositoryFactory extends JpaRepositoryFactory {
 //            return DefaultJpaRepository.class;
 //        }
 
-        public DefaultRepositoryFactory(EntityManager entityManager) {
+        public BaseRepositoryFactory(EntityManager entityManager) {
             super(entityManager);
         }
 
         @Override
         protected SimpleJpaRepository getTargetRepository(RepositoryMetadata metadata, EntityManager em) {
-            return new DefaultJpaRepository(metadata.getDomainType(), em);
+            return new BaseJpaRepository(metadata.getDomainType(), em);
         }
 
 
         @Override
         protected Class<?> getRepositoryBaseClass(RepositoryMetadata metadata) {
-            return DefaultJpaRepository.class;
+            return BaseJpaRepository.class;
         }
     }

@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * Created by DarKnight on 14-2-5.
  */
-public interface BaseJpaRepository<T, ID extends Serializable> extends JpaRepository<T, ID> {
+public interface BaseJpaDao<T, ID extends Serializable> extends JpaRepository<T, ID> {
     public Criteria createCriteria();
 
     public Disjunction createdDisjunction();
