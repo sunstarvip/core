@@ -13,7 +13,9 @@ import java.util.Date;
 @Access(AccessType.PROPERTY)
 public class DefaultEntity {
     private String id;
+    // 是否启用：YES启用 NO不启用
     private String enableTag = EnableTag.YES;
+    // 是否逻辑删除：YES未逻辑删除 NO已逻辑删除
     private String visibleTag = VisibleTag.YES;
     private Integer sort = Sort.START;
     private Date createTime = new Date();
