@@ -4,33 +4,43 @@ import com.darknight.core.util.ParameterUtil;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.Date;
 
 /**
+ * 默认实体对象
  * Created by DarKnight on 14-2-2.
  */
 @MappedSuperclass
 @Access(AccessType.PROPERTY)
-public class DefaultEntity implements Serializable {
-    private String id;
-    // 是否启用：YES启用 NO不启用
-    private String enableTag = EnableTag.YES;
-    // 是否逻辑删除：YES未逻辑删除 NO已逻辑删除
-    private String visibleTag = VisibleTag.YES;
-    private Integer sort = Sort.START;
+public class DefaultEntity extends BaseEntity {
+    /**
+     * 是否启用：YES启用 NO不启用
+     */
+    private String enableTag = EnableTag.YES;  // 是否启用：YES启用 NO不启用
+    /**
+     * 是否逻辑删除：YES未逻辑删除 NO已逻辑删除
+     */
+    private String visibleTag = VisibleTag.YES;  // 是否逻辑删除：YES未逻辑删除 NO已逻辑删除
+    /**
+     * 创建时间
+     * 不可更新
+     */
     private Date createTime;
+    /**
+     * 更新时间
+     */
     private Date updateTime;
 
+    @Override
     @Id
     @GeneratedValue(generator="system-uuid")
     @GenericGenerator(name="system-uuid", strategy="uuid")
     public String getId() {
-        return id;
+        return super.getId();
     }
 
     public void setId(String id) {
-        this.id = id;
+        super.setId(id);
     }
 
     public String getEnableTag() {
@@ -47,14 +57,6 @@ public class DefaultEntity implements Serializable {
 
     public void setVisibleTag(String visibleTag) {
         this.visibleTag = visibleTag;
-    }
-
-    public Integer getSort() {
-        return sort;
-    }
-
-    public void setSort(Integer sort) {
-        this.sort = sort;
     }
 
     @Column(updatable=false)
@@ -74,6 +76,12 @@ public class DefaultEntity implements Serializable {
         this.updateTime = updateTime;
     }
 
+    /**
+     * 判断对象是否相等
+     * @param obj
+     * @return
+     */
+    @Override
     public boolean equals(Object obj) {
         if(obj != null) {
             if(this == obj) {
@@ -98,7 +106,4 @@ public class DefaultEntity implements Serializable {
         public static final String NO = ParameterUtil.NO;
     }
 
-    public interface Sort {
-        public static final Integer START = ParameterUtil.START;
-    }
 }
