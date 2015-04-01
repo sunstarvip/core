@@ -4,6 +4,7 @@ import com.darknight.core.util.ParameterUtil;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -11,14 +12,14 @@ import java.util.Date;
  */
 @MappedSuperclass
 @Access(AccessType.PROPERTY)
-public class DefaultEntity {
+public class DefaultEntity implements Serializable {
     private String id;
     // 是否启用：YES启用 NO不启用
     private String enableTag = EnableTag.YES;
     // 是否逻辑删除：YES未逻辑删除 NO已逻辑删除
     private String visibleTag = VisibleTag.YES;
     private Integer sort = Sort.START;
-    private Date createTime = new Date();
+    private Date createTime;
     private Date updateTime;
 
     @Id

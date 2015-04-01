@@ -21,7 +21,7 @@ public class OverrideDirective implements TemplateDirectiveModel {
             TemplateDirectiveBody body) throws TemplateException, IOException {
 		String name = DirectiveUtils.getRequiredParam(params, "name");
 		String overrideVariableName = DirectiveUtils.getOverrideVariableName(name);
-		
+
 		TemplateDirectiveBodyOverrideWraper override = DirectiveUtils.getOverrideBody(env, name);
 		TemplateDirectiveBodyOverrideWraper current = new TemplateDirectiveBodyOverrideWraper(body,env);
 		if(override == null) {
