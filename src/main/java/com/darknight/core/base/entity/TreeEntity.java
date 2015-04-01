@@ -1,14 +1,33 @@
 package com.darknight.core.base.entity;
 
+import java.util.List;
+
 /**
  * 树型实体对象
  * Created by DarKnight on 2015/4/1.
  */
 public class TreeEntity extends BaseEntity {
     /**
-     * 父级ID
+     * 节点名称
+     */
+    private String text;
+    /**
+     * 父节点ID
      */
     private String parentId;
+
+    /**
+     * 子节点对象列表
+     */
+    private List<TreeEntity> children;
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
 
     public String getParentId() {
         return parentId;
@@ -16,6 +35,14 @@ public class TreeEntity extends BaseEntity {
 
     public void setParentId(String parentId) {
         this.parentId = parentId;
+    }
+
+    public List<TreeEntity> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<TreeEntity> children) {
+        this.children = children;
     }
 
     /**
