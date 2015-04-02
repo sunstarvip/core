@@ -133,6 +133,19 @@ public abstract class BaseManager<M extends DefaultEntity, ID extends Serializab
     }
 
     /**
+     * 用来查询未逻辑删除的实体对象
+     * 用来获取自定义Criteria对象
+     * @return
+     */
+    public Criteria getVisibleCriteria() {
+        // 创建查询对象
+        Criteria criteria = baseDao.createCriteria();
+        // 添加查询规则
+        criteria.add(Restrictions.eq("visibleTag", DefaultEntity.VisibleTag.YES));
+        return criteria;
+    }
+
+    /**
      * 根据实体对象ID, 查询实体对象
      * @param entityId 实体对象ID
      * @return
@@ -194,10 +207,9 @@ public abstract class BaseManager<M extends DefaultEntity, ID extends Serializab
      * @return
      */
     public List<M> findAllVisible() {
-        // 创建查询对象
-        Criteria criteria = baseDao.createCriteria();
-        // 添加查询规则
-        criteria.add(Restrictions.eq("visibleTag", DefaultEntity.VisibleTag.YES));
+        // 获取自定义查询对象，查询未逻辑删除的实体对象
+        Criteria criteria = getVisibleCriteria();
+
         List<M> entityList = criteria.list();
         return entityList;
     }

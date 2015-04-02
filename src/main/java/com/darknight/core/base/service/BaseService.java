@@ -1,6 +1,7 @@
 package com.darknight.core.base.service;
 
 import com.darknight.core.base.entity.DefaultEntity;
+import org.hibernate.Criteria;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -79,6 +80,13 @@ public interface BaseService<M extends DefaultEntity, ID extends Serializable> {
      * @return
      */
     public boolean exists(ID entityId);
+
+    /**
+     * 用来查询未逻辑删除的实体对象
+     * 用来获取自定义Criteria对象
+     * @return
+     */
+    public Criteria getVisibleCriteria();
 
     /**
      * 根据实体对象ID, 查询实体对象
