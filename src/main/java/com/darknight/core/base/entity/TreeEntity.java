@@ -1,5 +1,8 @@
 package com.darknight.core.base.entity;
 
+import com.darknight.core.util.ParameterUtil;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,6 +15,10 @@ public class TreeEntity extends BaseEntity {
      */
     private String text;
     /**
+     * 节点展开状态
+     */
+    private String state;
+    /**
      * 父节点ID
      */
     private String parentId;
@@ -19,7 +26,7 @@ public class TreeEntity extends BaseEntity {
     /**
      * 子节点对象列表
      */
-    private List<TreeEntity> children;
+    private List<? extends TreeEntity> children = new ArrayList<>();
 
     public String getText() {
         return text;
@@ -37,11 +44,11 @@ public class TreeEntity extends BaseEntity {
         this.parentId = parentId;
     }
 
-    public List<TreeEntity> getChildren() {
+    public List<? extends TreeEntity> getChildren() {
         return children;
     }
 
-    public void setChildren(List<TreeEntity> children) {
+    public void setChildren(List<? extends TreeEntity> children) {
         this.children = children;
     }
 
@@ -63,5 +70,10 @@ public class TreeEntity extends BaseEntity {
             }
         }
         return false;
+    }
+
+    public interface State {
+        public static final String OPEN = ParameterUtil.OPEN;
+        public static final String CLOSED = ParameterUtil.CLOSED;
     }
 }
