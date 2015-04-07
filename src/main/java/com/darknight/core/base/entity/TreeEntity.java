@@ -81,7 +81,7 @@ public class TreeEntity extends BaseEntity {
     }
 
     public interface State {
-        public static final String OPEN = ParameterUtil.OPEN;
-        public static final String CLOSED = ParameterUtil.CLOSED;
+        String OPEN = ParameterUtil.OPEN;
+        String CLOSED = ParameterUtil.CLOSED;
     }
 }

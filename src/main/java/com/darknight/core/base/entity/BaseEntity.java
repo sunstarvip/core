@@ -54,6 +54,6 @@ public class BaseEntity implements Serializable {
     }
 
     public interface Sort {
-        public static final Integer START = ParameterUtil.START;
+        Integer START = ParameterUtil.START;
     }
 }

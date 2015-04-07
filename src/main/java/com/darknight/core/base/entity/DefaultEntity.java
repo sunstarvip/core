@@ -97,13 +97,13 @@ public class DefaultEntity extends BaseEntity {
     }
 
     public interface EnableTag {
-        public static final String YES = ParameterUtil.YES;
-        public static final String NO = ParameterUtil.NO;
+        String YES = ParameterUtil.YES;
+        String NO = ParameterUtil.NO;
     }
 
     public interface VisibleTag {
-        public static final String YES = ParameterUtil.YES;
-        public static final String NO = ParameterUtil.NO;
+        String YES = ParameterUtil.YES;
+        String NO = ParameterUtil.NO;
     }
 
 }
