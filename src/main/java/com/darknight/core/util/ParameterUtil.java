@@ -10,5 +10,8 @@ public class ParameterUtil {
     public static final String OPEN = "open";
     public static final String CLOSED = "closed";
 
+    public static final String SUCCESS = "success";
+    public static final String FAIL = "fail";
+
     public static final Integer START = 0;
 }

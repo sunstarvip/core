@@ -1,8 +1,10 @@
 package com.darknight.core.base.service.impl;
 
 import com.darknight.core.base.dao.BaseJpaDao;
+import com.darknight.core.base.entity.DataGridEntity;
 import com.darknight.core.base.entity.DefaultEntity;
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -146,6 +148,20 @@ public abstract class BaseManager<M extends DefaultEntity, ID extends Serializab
     }
 
     /**
+     * 用来查询未逻辑删除并进行默认排序过的实体对象
+     * 默认排序：updateTime desc 更新时间倒序
+     *          createTime desc 创建时间倒序
+     * 用来获取自定义Criteria对象
+     * @return
+     */
+    public Criteria getOrderedVisibleCriteria() {
+        Criteria criteria = getVisibleCriteria();
+        criteria.addOrder(Order.desc("createTime"));
+        criteria.addOrder(Order.desc("updateTime"));
+        return criteria;
+    }
+
+    /**
      * 根据实体对象ID, 查询实体对象
      * @param entityId 实体对象ID
      * @return
@@ -209,6 +225,20 @@ public abstract class BaseManager<M extends DefaultEntity, ID extends Serializab
     public List<M> findAllVisible() {
         // 获取自定义查询对象，查询未逻辑删除的实体对象
         Criteria criteria = getVisibleCriteria();
+
+        List<M> entityList = criteria.list();
+        return entityList;
+    }
+
+    /**
+     * 查询所有未逻辑删除并默认排序过的实体对象
+     * 默认排序：updateTime desc 更新时间倒序
+     *          createTime desc 创建时间倒序
+     * @return
+     */
+    public List<M> findAllOrderedVisible() {
+        // 获取自定义查询对象，查询未逻辑删除并默认排序过的实体对象
+        Criteria criteria = getOrderedVisibleCriteria();
 
         List<M> entityList = criteria.list();
         return entityList;
@@ -288,5 +318,20 @@ public abstract class BaseManager<M extends DefaultEntity, ID extends Serializab
             }
             save(entityList);
         }
+    }
+
+    /**
+     * 通过分页容器对象来生成数据表格对象
+     * @param page 分页容器对象
+     * @return DataGridEntity 数据表格对象
+     */
+    public DataGridEntity<M> makeDataGrid(Page<M> page) {
+        DataGridEntity<M> dataGrid = new DataGridEntity<>();
+        if(page != null && page.getTotalElements() > 0) {
+            // 设置数据总树
+            dataGrid.setTotal(page.getTotalElements());
+            dataGrid.setRows(page.getContent());
+        }
+        return dataGrid;
     }
 }

@@ -1,5 +1,6 @@
 package com.darknight.core.base.service;
 
+import com.darknight.core.base.entity.DataGridEntity;
 import com.darknight.core.base.entity.DefaultEntity;
 import org.hibernate.Criteria;
 import org.springframework.data.domain.Page;
@@ -18,147 +19,171 @@ public interface BaseService<M extends DefaultEntity, ID extends Serializable> {
     /**
      * 推送缓存中的数据操作至数据库
      */
-    public void flush();
+    void flush();
 
     /**
      * 保存对象
      * @param entity 实体对象
      * @return
      */
-    public M save(M entity);
+    M save(M entity);
 
     /**
      * 批量保存对象
      * @param entitylist 实体对象列表
      * @return
      */
-    public List<M> save(List<M> entitylist);
+    List<M> save(List<M> entitylist);
 
     /**
      * 删除该实体对象ID下的实体对象
      * 物理删除
      * @param entityId 实体对象ID
      */
-    public void realDelete(ID entityId);
+    void realDelete(ID entityId);
 
     /**
      * 根据传入实体对象ID, 批量删除实体对象
      * 物理删除
      * @param idList 实体对象ID列表
      */
-    public void realDelete(List<ID> idList);
+    void realDelete(List<ID> idList);
 
     /**
      * 删除实体对象
      * 物理删除
      * @param entity 实体对象
      */
-    public void realDelete(M entity);
+    void realDelete(M entity);
 
     /**
      * 批量删除实体对象
      * 物理删除
      * @param entityList 实体对象列表
      */
-    public void realDeleteInBatch(List<M> entityList);
+    void realDeleteInBatch(List<M> entityList);
 
     /**
      * 删除所有的实体对象
      * 物理删除
      */
-    public void realDeleteAll();
+    void realDeleteAll();
 
     /**
      * 统计所有实体对象的总数量
      * @return
      */
-    public long count();
+    long count();
 
     /**
      * 根据传入实体对象ID, 判断该实体对象是否存在
      * @param entityId 实体对象ID
      * @return
      */
-    public boolean exists(ID entityId);
+    boolean exists(ID entityId);
 
     /**
      * 用来查询未逻辑删除的实体对象
      * 用来获取自定义Criteria对象
      * @return
      */
-    public Criteria getVisibleCriteria();
+    Criteria getVisibleCriteria();
+
+    /**
+     * 用来查询未逻辑删除并进行默认排序过的实体对象
+     * 默认排序：updateTime desc 更新时间倒序
+     *          createTime desc 创建时间倒序
+     * 用来获取自定义Criteria对象
+     * @return
+     */
+    Criteria getOrderedVisibleCriteria();
 
     /**
      * 根据实体对象ID, 查询实体对象
      * @param entityId 实体对象ID
      * @return
      */
-    public M find(ID entityId);
+    M find(ID entityId);
 
     /**
      * 根据传入的实体对象ID, 批量查询实体对象
      * @param idList 实体对象ID列表
      * @return
      */
-    public List<M> find(List<ID> idList);
+    List<M> find(List<ID> idList);
 
     /**
      * 查询所有的实体对象
      * @return
      */
-    public List<M> findAll();
+    List<M> findAll();
 
     /**
      * 分页查询所有的实体对象
      * @param page 分页容器
      * @return
      */
-    public Page<M> findAll(Pageable page);
+    Page<M> findAll(Pageable page);
 
     /**
      * 查询所有的实体对象, 并根据Sort排序规则进行排序
      * @param sort 排序规则对象
      * @return
      */
-    public List<M> findAll(Sort sort);
+    List<M> findAll(Sort sort);
 
     /**
      * 查询所有未逻辑删除的实体对象
      * @return
      */
-    public List<M> findAllVisible();
+    List<M> findAllVisible();
+
+    /**
+     * 查询所有未逻辑删除并默认排序过的实体对象
+     * 默认排序：updateTime desc 更新时间倒序
+     *          createTime desc 创建时间倒序
+     * @return
+     */
+    List<M> findAllOrderedVisible();
 
     /**
      * 删除该实体对象ID下的实体对象
      * 逻辑删除
      * @param entityId 实体对象ID
      */
-    public void delete(ID entityId);
+    void delete(ID entityId);
 
     /**
      * 根据传入实体对象ID, 批量删除实体对象
      * 逻辑删除
      * @param idList 实体对象ID列表
      */
-    public void delete(List<ID> idList);
+    void delete(List<ID> idList);
 
     /**
      * 删除实体对象
      * 逻辑删除
      * @param entity 实体对象
      */
-    public void delete(M entity);
+    void delete(M entity);
 
     /**
      * 批量删除实体对象
      * 逻辑删除
      * @param entityList 实体对象列表
      */
-    public void deleteInBatch(List<M> entityList);
+    void deleteInBatch(List<M> entityList);
 
     /**
      * 删除所有的实体对象
      * 逻辑删除
      */
-    public void deleteAll();
+    void deleteAll();
+
+    /**
+     * 通过分页容器对象来生成数据表格对象
+     * @param page 分页容器对象
+     * @return DataGridEntity 数据表格对象
+     */
+    DataGridEntity<M> makeDataGrid(Page<M> page);
 }
